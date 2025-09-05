@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>Perfil Profissional — SophiaLabs</title>
+  <meta name="description" content="One‑page de perfil profissional moderna, escura e responsiva para GitHub Pages. Somente HTML5 + CSS3 + JavaScript puro." />
+  <meta property="og:title" content="Perfil Profissional — SophiaLabs" />
+  <meta property="og:description" content="Template elegante para páginas pessoais de colaboradores." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0b0f17" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* =====================
+       DESIGN SYSTEM (Dark)
+       ===================== */
+    :root {
+      --bg: #0b0f17;
+      --bg-2: #0e1422;
+      --card: #121826;
+      --card-2: #0f1625;
+      --text: #e5e7eb;
+      --muted: #98a1b3; /* slate-400 */
+      --muted-2: #7a8599;
+      --accent: #8b5cf6; /* violeta */
+      --accent-2: #06b6d4; /* ciano */
+      --success: #14b8a6;
+      --warning: #f59e0b;
+      --radius: 16px;
+      --shadow: 0 12px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
+      --ring: 0 0 0 2px rgba(139,92,246,.35);
+      --maxw: 1120px;
+    }
+
+    /* Reset moderno */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text); background: var(--bg);
+      line-height: 1.6; letter-spacing: .2px; overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    /* Background animado sutil */
+    .bg-wrap {
+      position: fixed; inset: -20vmax; z-index: -1; filter: saturate(1.05);
+      background:
+        radial-gradient(60vmax 60vmax at 10% 10%, rgba(139,92,246,.08), transparent 60%),
+        radial-gradient(60vmax 60vmax at 90% 30%, rgba(6,182,212,.08), transparent 60%),
+        radial-gradient(70vmax 70vmax at 50% 80%, rgba(124,58,237,.06), transparent 60%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 60%, var(--bg) 100%);
+      animation: floatBg 20s ease-in-out infinite alternate;
+    }
+    @keyframes floatBg { to { transform: translateY(-2.5%) scale(1.01); } }
+
+    /* Container */
+    .container { width: 92%; max-width: var(--maxw); margin-inline: auto; }
+
+    /* Navbar */
+    .nav {
+      position: sticky; top: 0; backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(17,24,39,.75), rgba(17,24,39,.45));
+      border-bottom: 1px solid rgba(148,163,184,.12);
+      z-index: 50;
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand .logo {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: var(--shadow);
+      display: grid; place-items: center; font-weight: 800; font-size: 14px; color: #0b0f17;
+    }
+    .brand .name { font-weight: 700; letter-spacing: .3px; }
+    .nav a:hover { color: white; }
+    .nav-links { display: flex; gap: 18px; align-items: center; font-weight: 500; color: var(--muted); }
+    .pill {
+      display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid rgba(148,163,184,.15);
+    }
+
+    /* Hero */
+    .hero { padding: 64px 0 24px; }
+    .hero-card {
+      display: grid; grid-template-columns: 1.2fr .8fr; gap: 28px; align-items: center;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px solid rgba(148,163,184,.15); border-radius: calc(var(--radius) + 4px);
+      padding: 28px; box-shadow: var(--shadow);
+    }
+    .hero h1 { font-size: clamp(28px, 5vw, 42px); line-height: 1.15; margin: 0 0 8px; }
+    .tag { color: var(--muted); font-weight: 500; letter-spacing: .4px; }
+    .hero .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(148,163,184,.18);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); color: var(--text); font-weight: 600;
+      box-shadow: var(--shadow); transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 40px rgba(139,92,246,.18); }
+    .btn.primary { border-color: rgba(139,92,246,.45); background: linear-gradient(135deg, rgba(139,92,246,.35), rgba(6,182,212,.23)); }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: 10px; color: var(--muted); }
+    .avatar {
+      justify-self: end; width: 190px; height: 190px; border-radius: 22px; overflow: hidden; position: relative;
+      border: 1px solid rgba(148,163,184,.2); background: #0e1524;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(1.05) contrast(1.02); }
+
+    /* Seções */
+    section { padding: 56px 0; position: relative; }
+    .section-title { font-size: clamp(20px, 2.2vw, 28px); margin: 0 0 20px; letter-spacing: .4px; }
+    .section-desc { color: var(--muted); margin-bottom: 24px; }
+
+    /* Grid cards */
+    .grid { display: grid; gap: 16px; }
+    @media (min-width: 800px) { .grid.cols-2 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (min-width: 1000px) { .grid.cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border: 1px solid rgba(148,163,184,.15); border-radius: var(--radius);
+      padding: 18px 18px; box-shadow: var(--shadow);
+    }
+
+    /* Timeline */
+    .timeline { position: relative; margin: 8px 0; }
+    .timeline::before { content:""; position: absolute; left: 14px; top: 0; bottom: 0; width: 2px; background: linear-gradient(var(--accent), transparent); opacity: .5; }
+    .t-item { position: relative; padding-left: 44px; padding-bottom: 18px; }
+    .t-item:last-child { padding-bottom: 0; }
+    .t-dot {
+      position: absolute; left: 6px; top: 6px; width: 16px; height: 16px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, white, var(--accent)); box-shadow: 0 0 0 4px rgba(139,92,246,.15);
+    }
+    .t-role { font-weight: 700; }
+    .t-where { color: var(--muted); font-weight: 500; }
+    .t-period { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; color: var(--muted); font-size: .9rem; }
+    .t-desc { margin-top: 6px; color: #cbd5e1; }
+    .t-list { margin: 8px 0 0 0; padding-left: 18px; color: #cbd5e1; }
+
+    /* Skills */
+    .skill { display: grid; gap: 8px; }
+    .bar { height: 9px; border-radius: 999px; background: rgba(148,163,184,.18); overflow: hidden; border: 1px solid rgba(148,163,184,.15); }
+    .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow: inset 0 0 8px rgba(0,0,0,.3); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag-pill { padding: 6px 10px; border-radius: 999px; background: rgba(148,163,184,.08); border: 1px solid rgba(148,163,184,.18); color: #d1d5db; font-weight: 500; }
+
+    /* Projetos */
+    .project { display: grid; gap: 12px; }
+    .project .thumb { aspect-ratio: 16/9; border-radius: 14px; overflow: hidden; border: 1px solid rgba(148,163,184,.15); background: linear-gradient(135deg, rgba(139,92,246,.1), rgba(6,182,212,.1)); }
+    .project .thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Contatos */
+    .contact-list { display: grid; gap: 10px; }
+    .contact-item { display: grid; grid-template-columns: 32px 1fr; align-items: center; gap: 12px; color: #d1d5db; }
+    .contact-item svg { opacity: .9; }
+
+    /* Footer */
+    footer { padding: 28px 0 60px; color: var(--muted); border-top: 1px solid rgba(148,163,184,.12); background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); }
+    .foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .foot .credits { display: inline-flex; gap: 6px; align-items: center; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-card { grid-template-columns: 1fr; }
+      .avatar { justify-self: start; width: 160px; height: 160px; }
+      .nav-links { display: none; }
+    }
+
+    /* Effects */
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+
+    .kbd { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: .9rem; color: #cbd5e1; }
+  </style>
+</head>
+<body>
+  <div class="bg-wrap" aria-hidden="true"></div>
+
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Início">
+        <div class="logo" id="companyLogoMark">SL</div>
+        <div class="name" id="companyName">SophiaLabs</div>
+      </a>
+      <div class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#academica">Jornada Acadêmica</a>
+        <a href="#profissional">Jornada Profissional</a>
+        <a href="#skills">Skills</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#certificados">Certificados</a>
+        <a href="#contato" class="pill">Contato</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero container" id="top">
+    <div class="hero-card reveal">
+      <div>
+        <span class="pill tag" id="role">Cargo</span>
+        <h1 id="fullName">Nome do Profissional</h1>
+        <div class="meta">
+          <span id="location">Cidade, País</span>
+          <span>•</span>
+          <span id="email">email@empresa.com</span>
+        </div>
+        <p class="section-desc" id="aboutShort">Texto curto sobre o profissional. Substitua no CONFIG no final do arquivo.</p>
+        <div class="actions">
+          <a id="btnCV" class="btn primary" href="#" target="_blank" rel="noopener">Baixar CV</a>
+          <a id="btnLinkedin" class="btn" href="#" target="_blank" rel="noopener">LinkedIn</a>
+          <a id="btnGithub" class="btn" href="#" target="_blank" rel="noopener">GitHub</a>
+          <a id="btnWhatsapp" class="btn" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <div class="avatar">
+        <img id="avatar" alt="Foto do profissional" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=640&auto=format&fit=crop" />
+      </div>
+    </div>
+  </header>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="container">
+      <h2 class="section-title">Sobre</h2>
+      <p class="section-desc" id="aboutLong">Breve biografia: missão, valores, focos técnicos e o que essa pessoa traz para a SophiaLabs. Esse texto é carregado via CONFIG.</p>
+      <div class="grid cols-3">
+        <div class="card">
+          <div class="t-role">Tempo de experiência</div>
+          <div class="t-desc"><span id="yearsExp">—</span> anos construindo produtos escaláveis.</div>
+        </div>
+        <div class="card">
+          <div class="t-role">Áreas de foco</div>
+          <div class="tags" id="focusTags"></div>
+        </div>
+        <div class="card">
+          <div class="t-role">Linguagens</div>
+          <div class="tags" id="languagesTags"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACADÊMICA -->
+  <section id="academica">
+    <div class="container">
+      <h2 class="section-title">Jornada Acadêmica</h2>
+      <p class="section-desc">Formações, especializações e pós‑graduações.</p>
+      <div class="card reveal">
+        <div class="timeline" id="timelineAcademic"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFISSIONAL -->
+  <section id="profissional">
+    <div class="container">
+      <h2 class="section-title">Jornada Profissional</h2>
+      <p class="section-desc">Experiências, entregas e resultados relevantes.</p>
+      <div class="card reveal">
+        <div class="timeline" id="timelineProfessional"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title">Habilidades Técnicas</h2>
+      <p class="section-desc">Nível estimado por prática real de projetos.</p>
+      <div class="grid cols-3" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos">
+    <div class="container">
+      <h2 class="section-title">Projetos em Destaque</h2>
+      <p class="section-desc">Casos que representam bem o estilo de trabalho e qualidade.</p>
+      <div class="grid cols-3" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- CERTIFICADOS -->
+  <section id="certificados">
+    <div class="container">
+      <h2 class="section-title">Certificações & Prêmios</h2>
+      <div class="grid cols-2" id="certsGrid"></div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="container">
+      <h2 class="section-title">Contato</h2>
+      <div class="grid cols-2">
+        <div class="card contact-list">
+          <div class="contact-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16v16H4V4Zm8 9 8-5H4l8 5Zm0 2L4 10v10h16V10l-8 5Z" fill="currentColor" opacity=".9"/></svg>
+            <div id="contactEmail">email@empresa.com</div>
+          </div>
+          <div class="contact-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.6 10.8c1.2 2.4 3.2 4.3 5.6 5.6l1.9-1.9c.2-.2.6-.3.9-.2 1 .3 2 .5 3.1.5.5 0 .9.4.9.9V20c0 .5-.4.9-.9.9C9.7 20.9 3.1 14.3 3.1 6.9 3.1 6.4 3.5 6 4 6h3.3c.5 0 .9.4.9.9 0 1.1.2 2.1.5 3.1.1.3 0 .6-.2.9l-1.9 1.9Z" fill="currentColor" opacity=".9"/></svg>
+            <div id="contactPhone">+55 00 00000-0000</div>
+          </div>
+          <div class="contact-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.2C6.5 2.2 2 6.7 2 12.2c0 4.4 2.9 8.1 6.9 9.4.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.2-1.4-1.2-1.4-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1.7 1.8 1.9 2.3.5.2 1.1.1 1.7 0 .1-.7.4-1.2.7-1.5-2.2-.2-4.5-1.1-4.5-5 0-1.1.4-2 .9-2.7-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.8 1.1.8-.2 1.6-.3 2.4-.3s1.6.1 2.4.3c2-1.4 2.8-1.1 2.8-1.1.5 1.4.2 2.5.1 2.7.6.7.9 1.6.9 2.7 0 3.9-2.3 4.8-4.5 5 .4.4.7 1 .7 2.1V21c0 .3.2.7.7.5 4-1.3 6.9-5 6.9-9.4C22 6.7 17.5 2.2 12 2.2Z" fill="currentColor" opacity=".9"/></svg>
+            <div id="contactGithub">github.com/usuario</div>
+          </div>
+          <div class="contact-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.45 20.45h-3.56v-5.28c0-1.26-.02-2.88-1.76-2.88-1.76 0-2.03 1.36-2.03 2.78v5.38H9.54V9h3.42v1.56h.05c.48-.9 1.66-1.85 3.42-1.85 3.66 0 4.34 2.41 4.34 5.54v6.2Z" fill="currentColor" opacity=".9"/></svg>
+            <div id="contactLinkedin">linkedin.com/in/usuario</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="t-role">Mensagem rápida</div>
+          <div class="t-desc">Dica: você pode hospedar essa página no GitHub Pages. Os dados abaixo são carregados via <span class="kbd">CONFIG</span> no fim do arquivo.</div>
+          <div class="t-desc">Atalho para edição: <span class="kbd">CTRL/CMD + F</span> e busque por <span class="kbd">CONFIG</span>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container foot">
+      <div>© <span id="year"></span> <span id="footerName">Nome do Profissional</span>. Todos os direitos reservados.</div>
+      <div class="credits">by <strong>SophiaLabs</strong></div>
+    </div>
+  </footer>
+
+  <script>
+    // =============================
+    // CONFIG — personalize aqui 👇
+    // =============================
+    const CONFIG = {
+      company: {
+        name: "SophiaLabs",
+        logoText: "SL", // se tiver imagem, informe em logoUrl
+        logoUrl: "", // ex.: "assets/logo.svg"
+        website: "https://sophialabs.example"
+      },
+      person: {
+        name: "Nome do Profissional",
+        role: "Cargo / Especialidade",
+        location: "Cidade, País",
+        email: "email@empresa.com",
+        phone: "+55 00 00000-0000",
+        photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=640&auto=format&fit=crop",
+        aboutShort: "Profissional focado em entregar impacto com qualidade e velocidade.",
+        aboutLong: "Escreva aqui um parágrafo mais completo sobre sua jornada, valores, paixões e diferenciais técnicos. Foque em resultados, produtos lançados e impacto no cliente.",
+        yearsExp: 5,
+        focuses: ["IA/ML", "Arquitetura de Software", "SaaS/Multi‑tenant", "Mensageria/WhatsApp"],
+        languages: ["Português (nativo)", "Inglês (avançado)", "Espanhol (intermediário)"],
+        cvUrl: "#",
+        links: {
+          linkedin: "#",
+          github: "#",
+          whatsapp: "#"
+        }
+      },
+      academic: [
+        { title: "Mestrado em Ciência da Computação", org: "Universidade X", period: "2023 — 2025", description: "Pesquisa em séries temporais e IA aplicada a negócios." },
+        { title: "Bacharelado em Sistemas de Informação", org: "Universidade Y", period: "2018 — 2022", description: "Ênfase em engenharia de software e arquitetura limpa." }
+      ],
+      professional: [
+        { role: "Senior Software Engineer", company: "SophiaLabs", period: "2023 — Atual",
+          achievements: ["Liderança técnica de plataforma multi‑serviços", "Redução de custos em 32% com automação", "Entrega de 4 produtos de impacto em 12 meses"] },
+        { role: "Backend Engineer", company: "Empresa Z", period: "2021 — 2023",
+          achievements: ["API de alta disponibilidade (99.95%)", "Integração com mensageria e pagamentos", "Observabilidade ponta‑a‑ponta"] }
+      ],
+      skills: [
+        { name: "Python", level: 92 },
+        { name: "FastAPI / Django", level: 88 },
+        { name: "Go / gRPC", level: 80 },
+        { name: "PostgreSQL / Redis", level: 86 },
+        { name: "Docker / CI/CD", level: 90 },
+        { name: "Angular / React", level: 78 }
+      ],
+      projects: [
+        { name: "Cronos Flow", description: "SaaS de automação WhatsApp com orquestração e proxies dedicados.", tags: ["FastAPI", "Next.js", "gRPC"], link: "#", image: "" },
+        { name: "Abadom", description: "Segurança & automação com criptografia e auto‑deleção.", tags: ["Python", "PyInstaller"], link: "#", image: "" },
+        { name: "MetisAuth", description: "Autenticação multi‑tenant, 2FA e verificação centralizada.", tags: ["Django", "JWT"], link: "#", image: "" }
+      ],
+      certificates: [
+        { name: "Kubernetes CKA", issuer: "CNCF", year: 2024, id: "CKA‑1234", link: "#" },
+        { name: "AWS Solutions Architect", issuer: "AWS", year: 2023, id: "AWS‑SA‑5678", link: "#" }
+      ]
+    };
+
+    // =============================
+    // Renderização dinâmica
+    // =============================
+    function el(id){ return document.getElementById(id); }
+
+    function setBrand(){
+      el('companyName').textContent = CONFIG.company.name || 'SophiaLabs';
+      const mark = el('companyLogoMark');
+      if (CONFIG.company.logoUrl) {
+        mark.style.background = 'none';
+        mark.style.borderRadius = '0';
+        mark.innerHTML = `<img src="${CONFIG.company.logoUrl}" alt="${CONFIG.company.name}" style="width:100%;height:100%;object-fit:contain;"/>`;
+      } else {
+        mark.textContent = CONFIG.company.logoText || 'SL';
+      }
+    }
+
+    function setHero(){
+      const p = CONFIG.person;
+      el('fullName').textContent = p.name;
+      el('role').textContent = p.role;
+      el('location').textContent = p.location;
+      el('email').textContent = p.email;
+      el('aboutShort').textContent = p.aboutShort;
+      el('avatar').src = p.photo;
+      el('btnCV').href = p.cvUrl || '#';
+      el('btnLinkedin').href = p.links.linkedin || '#';
+      el('btnGithub').href = p.links.github || '#';
+      el('btnWhatsapp').href = p.links.whatsapp || '#';
+    }
+
+    function setSobre(){
+      const p = CONFIG.person;
+      el('aboutLong').textContent = p.aboutLong;
+      el('yearsExp').textContent = p.yearsExp;
+      // foco
+      const ft = el('focusTags');
+      ft.innerHTML = '';
+      (p.focuses||[]).forEach(t=>{
+        const span = document.createElement('span');
+        span.className='tag-pill'; span.textContent=t; ft.appendChild(span);
+      });
+      // idiomas
+      const lt = el('languagesTags');
+      lt.innerHTML = '';
+      (p.languages||[]).forEach(t=>{
+        const span = document.createElement('span');
+        span.className='tag-pill'; span.textContent=t; lt.appendChild(span);
+      });
+    }
+
+    function timeline(containerId, items, map){
+      const container = el(containerId);
+      container.innerHTML = '';
+      (items||[]).forEach(it=>{
+        const wrap = document.createElement('div');
+        wrap.className='t-item';
+        wrap.innerHTML = `
+          <div class="t-dot"></div>
+          <div class="t-role">${map.role(it)}</div>
+          <div class="t-where">${map.where(it)}</div>
+          <div class="t-period">${map.period(it)}</div>
+          ${map.desc(it) ? `<div class="t-desc">${map.desc(it)}</div>` : ''}
+          ${map.list(it) ? `<ul class="t-list">${map.list(it).map(li=>`<li>${li}</li>`).join('')}</ul>` : ''}
+        `;
+        container.appendChild(wrap);
+      });
+    }
+
+    function setTimelines(){
+      timeline('timelineAcademic', CONFIG.academic, {
+        role: it=>it.title,
+        where: it=>it.org,
+        period: it=>it.period,
+        desc: it=>it.description||'',
+        list: _=>null
+      });
+      timeline('timelineProfessional', CONFIG.professional, {
+        role: it=>it.role,
+        where: it=>it.company,
+        period: it=>it.period,
+        desc: _=>'',
+        list: it=>it.achievements||null
+      });
+    }
+
+    function setSkills(){
+      const box = el('skillsGrid');
+      box.innerHTML = '';
+      (CONFIG.skills||[]).forEach(s=>{
+        const card = document.createElement('div');
+        card.className = 'card skill reveal';
+        card.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-weight:700">${s.name}</div>
+            <div class="kbd">${s.level}%</div>
+          </div>
+          <div class="bar"><span style="width:${Math.max(0, Math.min(100, s.level))}%"></span></div>
+        `;
+        box.appendChild(card);
+      });
+    }
+
+    function setProjects(){
+      const box = el('projectsGrid');
+      box.innerHTML = '';
+      (CONFIG.projects||[]).forEach(p=>{
+        const card = document.createElement('a');
+        card.className = 'card project reveal';
+        card.href = p.link || '#'; card.target = '_blank'; card.rel = 'noopener';
+        const thumb = p.image ? `<img src="${p.image}" alt="${p.name}">` : '';
+        card.innerHTML = `
+          <div class="thumb">${thumb}</div>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">
+            <div>
+              <div style="font-weight:700; font-size:1.05rem">${p.name}</div>
+              <div class="t-desc">${p.description||''}</div>
+            </div>
+          </div>
+          <div class="tags">${(p.tags||[]).map(t=>`<span class='tag-pill'>${t}</span>`).join('')}</div>
+        `;
+        box.appendChild(card);
+      });
+    }
+
+    function setCerts(){
+      const box = el('certsGrid');
+      box.innerHTML = '';
+      (CONFIG.certificates||[]).forEach(c=>{
+        const card = document.createElement('a');
+        card.className = 'card reveal';
+        card.href = c.link || '#'; card.target = '_blank'; card.rel = 'noopener';
+        card.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+            <div>
+              <div style="font-weight:700">${c.name}</div>
+              <div class="t-where">${c.issuer} • ${c.year}</div>
+              ${c.id ? `<div class="t-desc">ID: ${c.id}</div>` : ''}
+            </div>
+            <div class="tag-pill">Ver</div>
+          </div>
+        `;
+        box.appendChild(card);
+      });
+    }
+
+    function setContact(){
+      const p = CONFIG.person;
+      el('contactEmail').textContent = p.email;
+      el('contactPhone').textContent = p.phone;
+      el('contactGithub').textContent = (CONFIG.person.links.github||'').replace(/^https?:\/\//,'');
+      el('contactLinkedin').textContent = (CONFIG.person.links.linkedin||'').replace(/^https?:\/\//,'');
+      el('footerName').textContent = p.name;
+      document.title = `${p.name} — ${p.role}`;
+    }
+
+    function setupReveal(){
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+      }, { threshold: .15 });
+      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    }
+
+    function smoothAnchors(){
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const id = a.getAttribute('href');
+          if(id.length>1){ e.preventDefault(); document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start'}); }
+        });
+      });
+    }
+
+    function init(){
+      setBrand(); setHero(); setSobre(); setTimelines(); setSkills(); setProjects(); setCerts(); setContact();
+      setupReveal(); smoothAnchors();
+      el('year').textContent = new Date().getFullYear();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
